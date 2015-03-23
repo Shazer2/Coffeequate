@@ -117,6 +117,16 @@ define ["parse", "nodes"], (parse, nodes) ->
 				expr = @expr.copy()
 			new Expression(expr)
 
+		# Expand and simplify expression
+		#
+		# @return [Expression] An expanded and simplified Expression
+		expandAndSimplify: ->
+			if @expr.expand? and @expr.simplify?
+				expr = @expr.expand().simplify()
+			else
+				expr = @expr.copy()
+			new Expression(expr)
+
 		# Differentiate this expression with respect to a variable.
 		#
 		# @param variable [String] The label of the variable to differentiate with respect to.
